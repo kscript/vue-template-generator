@@ -1,24 +1,23 @@
 {
     "name": "vue-template-generator",
     "displayName": "vue-template-generator",
-    "description": "",
+    "description": "一个自用的Vue模板生成器",
     "version": "0.0.1",
+    "publisher": "luren",
+    "enableProposedApi": true,
     "engines": {
         "vscode": "^1.30.0"
     },
     "categories": [
         "Other"
     ],
-    "activationEvents": [
-        "onCommand:extension.sayHello"
+    "keywords": [
+        "vue",
+        "template",
+        "generator",
+        "tool"
     ],
     "main": "./out/extension",
-    "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
-    },
     "scripts": {
         "vscode:prepublish": "yarn run compile",
         "compile": "tsc -p ./",
@@ -26,11 +25,41 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "yarn run compile && node ./node_modules/vscode/bin/test"
     },
+    "activationEvents": [
+        "onCommand:vueTemplateGenerator.uicomponent"
+    ],
+    "capabilities": {
+        "completionProvider": {
+            "resolveProvider": "true",
+            "externalConsole": "true",
+            "triggerCharacters": [
+                "import "
+            ]
+        }
+    },
+    "contributes": {
+        "commands": [
+            {
+                "command": "vueTemplateGenerator.uicomponent",
+                "title": "生成VueUI组件目录"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "vueTemplateGenerator.uicomponent",
+                    "group": "vueTemplateGenerator@1"
+                }
+            ]
+        }
+    },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.21",
-        "tslint": "^5.8.0",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^8.10.25",
-        "@types/mocha": "^2.2.42"
+        "fs": "^0.0.1-security",
+        "path": "^0.12.7",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.28"
     }
 }
